@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Runtime.InteropServices.JavaScript;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
@@ -23,44 +24,68 @@ public class HomeController : Controller
      *
      * Utworz metode Calculator oraz widok, w nim wyswietl tylko napis Kalkulator
      * Dodaj link w nawigacji aplikacji do metody calculator
+     *
+     *
+     *
+     *
+     * ZAD 2
+     *
+     * NAPISZ METODE AGE, KTORA PRZYJMUJE PARAMETR Z DATA URODZIN I WYSWIETLA WIEK
+     * W LATACH, MIESIACACH I DNIACH.
      */
     
     
-    public IActionResult Calculator()
+    public IActionResult Calculator(Operator? op, double? x, double? y)
     {
 
         //https://localhost:7172/Home/Calculator?ap=add&x=4&y=1,5
-        var op=Request.Query["op"];
+       // var op=Request.Query["op"];
         
-        var x=double.Parse(Request.Query["x"]);
+        //var x=double.Parse(Request.Query["x"]);
         
-        var y=double.Parse(Request.Query["y"]);
+       // var y=double.Parse(Request.Query["y"]);
 
-        var result = 0.0d;
+
+       if (x is null || y is null)
+       {
+           ViewBag.ErrorMessage = "Niepoprawny format x albo y lub ich brak";
+           return View("CalculatorError");
+       }
+
+       if (op is null)
+       {
+           ViewBag.ErrorMessage = "Nieznany operator";
+           return View("CalculatorError");
+       }
+       
+        double? result = 0.0d;
 
         switch (op)
         {
-            case "add":
+            case Operator.Add:
                 result = x + y;
                 ViewBag.Operator = "+";
                 break;
             
-            case "sub":
+            case Operator.Sub:
                 result = x - y;
                 ViewBag.Operator = "-";
                 break;
             
-            case "mul":
+            case Operator.Mul:
                 result = x * y;
                 ViewBag.Operator = "*";
                 break;
             
-            case "div":
+            case Operator.Div:
                 result = x / y;
                 ViewBag.Operator = ":";
                 break;
+            
+           
         }
-        ViewBag.Resukt = result;
+
+        ViewBag.Result = result;
         ViewBag.X = x;
         ViewBag.Y = y;
         //ViewBag.Operator = op;
@@ -81,3 +106,12 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
+
+public enum Operator
+{
+ Add,Sub,Mul,Div
+}
+
+/*
+
+*/
