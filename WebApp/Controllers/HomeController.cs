@@ -18,6 +18,22 @@ public class HomeController : Controller
         return View();
     }
 
+    
+    /*
+     *
+     * Utworz metode Calculator oraz widok, w nim wyswietl tylko napis Kalkulator
+     * Dodaj link w nawigacji aplikacji do metody calculator
+     */
+    
+    
+    public IActionResult Calculator()
+    {
+        return View();
+    }
+    public IActionResult About()
+    {
+        return View();
+    }
     public IActionResult Privacy()
     {
         return View();
