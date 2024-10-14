@@ -52,13 +52,6 @@ public class HomeController : Controller
             int years = currentDateTime.Year - parametr.Year;
             int months = (currentDateTime.Year - parametr.Year)*12+(currentDateTime.Month - parametr.Month);
 
-            // Dopasowanie miesięcy w przypadku, gdy miesiąc w aktualnej dacie jest wcześniejszy niż w parametrze
-            if (months < 0)
-            {
-                years--;
-                months += 12;
-            }
-
             // Przekazanie wartości do ViewBag
             ViewBag.years = years;
             ViewBag.months = months;
