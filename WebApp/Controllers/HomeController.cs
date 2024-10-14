@@ -34,6 +34,48 @@ public class HomeController : Controller
      * W LATACH, MIESIACACH I DNIACH.
      */
     
+
+    public IActionResult Age(int year, int month, int day)
+    {
+        try
+        {
+            // Zbudowanie daty z trzech parametrów
+            DateTime parametr = new DateTime(year, month, day);
+        
+            // Aktualna data
+            DateTime currentDateTime = DateTime.Now;
+
+            // Oblicz różnicę między datą obecną a podaną datą
+            TimeSpan wynik = currentDateTime - parametr;
+
+            // Oblicz lata, miesiące i dni
+            int years = currentDateTime.Year - parametr.Year;
+            int months = (currentDateTime.Year - parametr.Year)*12+(currentDateTime.Month - parametr.Month);
+
+            // Dopasowanie miesięcy w przypadku, gdy miesiąc w aktualnej dacie jest wcześniejszy niż w parametrze
+            if (months < 0)
+            {
+                years--;
+                months += 12;
+            }
+
+            // Przekazanie wartości do ViewBag
+            ViewBag.years = years;
+            ViewBag.months = months;
+            ViewBag.wynik = wynik;  // Całkowita różnica czasu
+
+            // Przekierowanie do widoku
+            return View();
+        }
+        catch (Exception ex)
+        {
+            // Obsługa błędów np. niepoprawna data
+            ViewBag.ErrorMessage = "Wprowadzono nieprawidłową datę.";
+            return View();
+        }
+    }
+
+
     
     public IActionResult Calculator(Operator? op, double? x, double? y)
     {

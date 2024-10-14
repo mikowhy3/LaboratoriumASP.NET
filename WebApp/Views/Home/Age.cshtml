@@ -1,0 +1,15 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Wiek";
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Wiek w latach: @(ViewBag.years != null ? ViewBag.years.ToString() : "Brak danych")</h3>
+<h4>Wiek w miesiącach: @(ViewBag.months != null ? ViewBag.months.ToString() : "Brak danych")</h4>
+<h5>Wiek w dniach: @(ViewBag.wynik != null ? ViewBag.wynik.Days.ToString() : "Brak danych")</h5>
+
